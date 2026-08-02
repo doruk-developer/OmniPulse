@@ -1,0 +1,550 @@
+﻿@{
+    ViewData["Title"] = "Omnipulse Komuta Kontrol & Mimari Paneli";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid py-3" data-aos="fade-in">
+    
+    <!-- 🟢 MİMARİ & BİLEŞEN CAMBAZLIĞI: Mimarinin "Göz Önüne" Çıkarıldığı Üst Başlık -->
+    <div class="page-header mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+        <div class="row align-items-center g-2">
+            <div class="col-md-6">
+                <div class="page-pretitle font-monospace mb-1 text-info opacity-75 d-flex align-items-center gap-2" style="font-size: 0.7rem; letter-spacing: 1.5px;">
+                    <i class="fa-solid fa-microchip text-success"></i>
+                    <span>ARCHITECTURE ENGINE // HIGH-FREQUENCY TELEMETRY CORE</span>
+                </div>
+                <h2 class="page-title font-monospace fw-bold text-white m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+                    <span class="status-dot status-success status-dot-animated" style="width: 12px; height: 12px;"></span>
+                    OmniPulse Enterprise Executive Dashboard
+                </h2>
+            </div>
+            
+            <div class="col-md-6 text-end">
+                <div class="d-flex align-items-center justify-content-md-end gap-2">
+                    <div class="font-monospace text-end me-2 d-none d-lg-block">
+                        <div class="text-muted" style="font-size: 0.6rem;">SYSTEM_TIME (UTC)</div>
+                        <div class="text-info fw-bold" id="liveUtcClock" style="font-size: 0.8rem;">@DateTime.UtcNow.ToString("yyyy.MM.dd // HH:mm:ss")</div>
+                    </div>
+                    <div class="badge bg-black border border-info text-info font-monospace p-2 text-start">
+                        <div class="text-muted" style="font-size: 0.55rem;">SYSTEM STATUS</div>
+                        <span class="text-success"><i class="fa-solid fa-circle-check me-1"></i>SYSTEM_NOMINAL // 150 UNITS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🏷️ GLASS-BOX ARCHITECTURE BADGES (4 TEKNOLOJİ + 4 OOP PRENSİBİ GÖSTERİSİ) -->
+    <div class="row g-2 mb-3 font-monospace">
+        <div class="col-12">
+            <div class="card bg-black border-secondary p-2 shadow-sm">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2" style="font-size: 0.65rem;">
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <span class="text-muted fw-bold me-1"><i class="fa-solid fa-layer-group text-warning me-1"></i>ARCH_STACK:</span>
+                        
+                        <!-- 1. INFLUXDB (Time-Series & Abstraction) -->
+                        <span class="badge bg-dark border border-success text-success p-2" data-bs-toggle="tooltip" title="Abstraction: ITelemetryRepository üzerinden Time-Series InfluxDB bağlandı.">
+                            <i class="fa-solid fa-database text-success me-1"></i>INFLUXDB 3.0 [FLUX ENGINE: 0.32ms]
+                            <span class="badge bg-success text-black ms-1">Abstraction</span>
+                        </span>
+
+                        <!-- 2. KEYCLOAK (OIDC & Encapsulation) -->
+                        <span class="badge bg-dark border border-info text-info p-2" data-bs-toggle="tooltip" title="Encapsulation: Identity claims ve OIDC token doğrulama gizlendi.">
+                            <i class="fa-solid fa-key text-info me-1"></i>KEYCLOAK OIDC [ZERO-TRUST ACTIVE]
+                            <span class="badge bg-info text-black ms-1">Encapsulation</span>
+                        </span>
+
+                        <!-- 3. ELSA WORKFLOWS (Process Automation & Inheritance) -->
+                        <span class="badge bg-dark border border-warning text-warning p-2" data-bs-toggle="tooltip" title="Inheritance: BaseWorkflowStep sınıfından kalıtılan otomasyon.">
+                            <i class="fa-solid fa-diagram-project text-warning me-1"></i>ELSA WORKFLOW [ENGINE RUNNING]
+                            <span class="badge bg-warning text-black ms-1">Inheritance</span>
+                        </span>
+
+                        <!-- 4. MCP SERVER (Agentic AI & Polymorphism) -->
+                        <span class="badge bg-dark border border-danger text-danger p-2" data-bs-toggle="tooltip" title="Polymorphism: IMcpAgent üzerinden çok biçimli yapay zeka çağrısı.">
+                            <i class="fa-solid fa-brain text-danger me-1"></i>MCP SERVER [AGENTIC AI ACTIVE]
+                            <span class="badge bg-danger text-white ms-1">Polymorphism</span>
+                        </span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 text-muted">
+                        <span class="badge bg-dark border border-secondary text-info"><i class="fa-solid fa-bolt me-1"></i>Channel&lt;T&gt; Buffer: 12 / 100k</span>
+                        <span class="badge bg-dark border border-secondary text-success"><i class="fa-solid fa-wifi me-1"></i>UPLINK: 85ms</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🛠️ SIMULATION CONTROL TOOLBAR -->
+    <div class="card bg-black border-secondary mb-4">
+        <div class="card-body p-2">
+            <div class="row align-items-center g-2 font-monospace">
+                <div class="col-md-3">
+                    <span class="text-info fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-sliders me-1"></i>Simulation Control Center
+                    </span>
+                </div>
+                <div class="col-md-9 text-md-end d-flex flex-wrap justify-content-md-end gap-2">
+                    <button class="btn btn-sm btn-outline-success font-monospace" id="btnFlushInflux" onclick="triggerInfluxFlush()">
+                        <i class="fa-solid fa-bolt me-1"></i>Force InfluxDB Flush
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger font-monospace" id="btnSimulateAnomaly" onclick="triggerColdChainAnomaly()">
+                        <i class="fa-solid fa-triangle-exclamation me-1"></i>Simulate +8.5°C Anomaly
+                    </button>
+                    <button class="btn btn-sm btn-outline-info font-monospace" id="btnRunMcpAudit" onclick="triggerMcpAudit()">
+                        <i class="fa-solid fa-robot me-1"></i>Execute MCP Cognitive Audit
+                    </button>
+                    <button class="btn btn-sm btn-outline-warning font-monospace" id="btnTriggerElsa" onclick="triggerElsaWorkflow()">
+                        <i class="fa-solid fa-gears me-1"></i>Trigger Elsa Workflow
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary font-monospace" id="btnKeycloakRefresh" onclick="refreshKeycloakToken()">
+                        <i class="fa-solid fa-arrows-rotate me-1"></i>Refresh OIDC Token
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📊 KPI METRİK KARTLARI (4 BÜYÜK DİJİTAL SENSÖR KARTI) -->
+    <div class="row g-3 mb-4 font-monospace">
+        <!-- KPI 1: InfluxDB Telemetri Akışı -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card bg-black border-success border-opacity-50 h-100 p-3 shadow-sm" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted" style="font-size: 0.65rem;">INFLUXDB INGESTION RATE</span>
+                    <i class="fa-solid fa-database text-success fs-5"></i>
+                </div>
+                <div class="text-success fw-bold fs-3" id="kpiIngestionRate">24,850</div>
+                <div class="text-muted small mt-1 d-flex justify-content-between" style="font-size: 0.6rem;">
+                    <span>Writes: Point/sec</span>
+                    <span class="text-success"><i class="fa-solid fa-arrow-trend-up"></i> +12% Flux</span>
+                </div>
+                <div class="progress mt-2" style="height: 3px;">
+                    <div class="progress-bar bg-success" style="width: 85%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI 2: Soğuk Zincir Sıcaklık Ortalaması -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card bg-black border-info border-opacity-50 h-100 p-3 shadow-sm">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted" style="font-size: 0.65rem;">FLEET AVG COLD CHAIN TEMP</span>
+                    <i class="fa-solid fa-temperature-arrow-down text-info fs-5"></i>
+                </div>
+                <div class="text-info fw-bold fs-3" id="kpiAvgTemp">+3.4°C</div>
+                <div class="text-muted small mt-1 d-flex justify-content-between" style="font-size: 0.6rem;">
+                    <span>Threshold: +2°C to +8°C</span>
+                    <span class="text-info">150/150 Nominal</span>
+                </div>
+                <div class="progress mt-2" style="height: 3px;">
+                    <div class="progress-bar bg-info" style="width: 42%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI 3: System Latency & Channel Buffer -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card bg-black border-warning border-opacity-50 h-100 p-3 shadow-sm">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted" style="font-size: 0.65rem;">CHANNEL&lt;T&gt; BUFFER & LATENCY</span>
+                    <i class="fa-solid fa-bolt text-warning fs-5"></i>
+                </div>
+                <div class="text-warning fw-bold fs-3" id="kpiLatency">85 ms</div>
+                <div class="text-muted small mt-1 d-flex justify-content-between" style="font-size: 0.6rem;">
+                    <span>In-Memory Buffer</span>
+                    <span class="text-warning">Zero-Locking</span>
+                </div>
+                <div class="progress mt-2" style="height: 3px;">
+                    <div class="progress-bar bg-warning" style="width: 18%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- KPI 4: MCP Cognitive Confidence -->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card bg-black border-danger border-opacity-50 h-100 p-3 shadow-sm">
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="text-muted" style="font-size: 0.65rem;">MCP AGENTIC AI CONFIDENCE</span>
+                    <i class="fa-solid fa-brain text-danger fs-5"></i>
+                </div>
+                <div class="text-danger fw-bold fs-3" id="kpiMcpConfidence">98.42%</div>
+                <div class="text-muted small mt-1 d-flex justify-content-between" style="font-size: 0.6rem;">
+                    <span>Model Context Protocol</span>
+                    <span class="text-danger">Active Drift Watch</span>
+                </div>
+                <div class="progress mt-2" style="height: 3px;">
+                    <div class="progress-bar bg-danger" style="width: 98%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📈 CANLI TIME-SERIES CHART VE MİMARİ ADLİ TIP (FORENSICS) PANELDEN OLUŞAN MERKEZİ GRID -->
+    <div class="row g-3 mb-4">
+        <!-- SOL (8 Kolon): Live InfluxDB Time-Series Telemetry Stream Chart -->
+        <div class="col-lg-8">
+            <div class="card bg-black border-secondary h-100 shadow-sm">
+                <div class="card-header bg-dark border-secondary d-flex align-items-center justify-content-between p-2 font-monospace">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-chart-line text-success"></i>
+                        <span class="text-white fw-bold" style="font-size: 0.8rem;">INFLUXDB TIME-SERIES LIVE STREAM (MILLISECOND ACCURACY)</span>
+                    </div>
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-black border border-success text-success" style="font-size: 0.6rem;">FLUX QUERY ENGINE</span>
+                        <span class="status-dot status-success status-dot-animated"></span>
+                    </div>
+                </div>
+
+                <div class="card-body p-3">
+                    <div style="height: 340px; position: relative;">
+                        <canvas id="telemetryLiveChart"></canvas>
+                    </div>
+
+                    <!-- Terminal Output Console (Siber Log Akışı) -->
+                    <div class="mt-3 p-2 bg-dark rounded border border-secondary font-monospace" style="font-size: 0.65rem; max-height: 90px; overflow-y: auto;" id="terminalLogConsole">
+                        <div class="text-success">>> [INFLUXDB_INIT]: Connected to organization 'ApexOmni' bucket 'telemetry_fleet_v1'.</div>
+                        <div class="text-info">>> [KEYCLOAK_OIDC]: Bearer token validated for user 'Doruk_Avgın_Apex'.</div>
+                        <div class="text-warning">>> [ELSA_WORKFLOW]: Listening for 'ColdChainThresholdExceeded' events via MassTransit.</div>
+                        <div class="text-muted">>> [CHANNEL_BUFFER]: Worker thread executing unbatched InfluxDB write points.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAĞ (4 Kolon): Mimari Adli Tıp ve Sistem İnceleme Paneli -->
+        <div class="col-lg-4">
+            <div class="card bg-black border-secondary h-100 shadow-sm font-monospace">
+                <div class="card-header bg-dark border-secondary p-2 d-flex align-items-center justify-content-between">
+                    <span class="text-info fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-code-branch me-1"></i>SYSTEM ARCHITECTURE FORENSICS
+                    </span>
+                    <span class="badge bg-info text-black" style="font-size: 0.55rem;">GLASS-BOX</span>
+                </div>
+
+                <div class="card-body p-2 d-flex flex-column gap-2" style="font-size: 0.65rem;">
+                    
+                    <!-- Keycloak & Encapsulation Card -->
+                    <div class="p-2 border border-info border-opacity-25 rounded bg-dark">
+                        <div class="d-flex justify-content-between text-info fw-bold mb-1">
+                            <span><i class="fa-solid fa-shield-cat me-1"></i>1. Encapsulation (Keycloak)</span>
+                            <span class="text-muted">OIDC Guard</span>
+                        </div>
+                        <p class="text-muted m-0" style="font-size: 0.6rem;">
+                            Token claims and security details are encapsulated inside <code>TitanZeroTrustHandler</code> and <code>QuantumSafeMinter</code>.
+                        </p>
+                    </div>
+
+                    <!-- InfluxDB & Abstraction Card -->
+                    <div class="p-2 border border-success border-opacity-25 rounded bg-dark">
+                        <div class="d-flex justify-content-between text-success fw-bold mb-1">
+                            <span><i class="fa-solid fa-database me-1"></i>2. Abstraction (InfluxDB)</span>
+                            <span class="text-muted">Flux DAL</span>
+                        </div>
+                        <p class="text-muted m-0" style="font-size: 0.6rem;">
+                            Data access decoupled via <code>ITelemetryRepository</code>. Replaces SQL with high-frequency Flux time-series queries.
+                        </p>
+                    </div>
+
+                    <!-- Elsa Workflows & Inheritance Card -->
+                    <div class="p-2 border border-warning border-opacity-25 rounded bg-dark">
+                        <div class="d-flex justify-content-between text-warning fw-bold mb-1">
+                            <span><i class="fa-solid fa-diagram-next me-1"></i>3. Inheritance (Elsa Engine)</span>
+                            <span class="text-muted">Workflow</span>
+                        </div>
+                        <p class="text-muted m-0" style="font-size: 0.6rem;">
+                            Automation steps inherit from <code>BaseWorkflowStep</code>. MassTransit Saga handles multi-step state execution.
+                        </p>
+                    </div>
+
+                    <!-- MCP Server & Polymorphism Card -->
+                    <div class="p-2 border border-danger border-opacity-25 rounded bg-dark">
+                        <div class="d-flex justify-content-between text-danger fw-bold mb-1">
+                            <span><i class="fa-solid fa-brain me-1"></i>4. Polymorphism (MCP AI)</span>
+                            <span class="text-muted">Agentic Bridge</span>
+                        </div>
+                        <p class="text-muted m-0" style="font-size: 0.6rem;">
+                            <code>IMcpAgent</code> invokes polymorphic reasoning logic dynamically for drift and thermal anomaly detection.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌐 ALT TABLO: 150 CANLI AKTİF FİLO / SENSÖR ENVANTER TABLOSU -->
+    <div class="row g-3">
+        <div class="col-12">
+            <div class="card bg-black border-secondary font-monospace shadow-sm">
+                <div class="card-header bg-dark border-secondary p-2 d-flex align-items-center justify-content-between">
+                    <span class="text-white fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-truck-ramp-box me-2 text-info"></i>Live Refrigerated Fleet Nodes (150 Active Telemetry Sources)
+                    </span>
+                    <span class="badge bg-dark border border-secondary text-muted" style="font-size: 0.6rem;">UPDATED: JUST NOW</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-dark table-vcenter card-table table-hover align-middle mb-0" style="font-size: 0.7rem;">
+                        <thead>
+                            <tr class="text-muted border-secondary">
+                                <th>NODE ID</th>
+                                <th>VEHICLE / REFRIGERATOR</th>
+                                <th>COLD CHAIN TEMP</th>
+                                <th>INFLUXDB STATUS</th>
+                                <th>KEYCLOAK AUTH</th>
+                                <th>WORKFLOW STEP</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fleetTableBody">
+                            <tr>
+                                <td><code>NODE-TR-06-01</code></td>
+                                <td>Location-A Frigo #1</td>
+                                <td><span class="badge bg-success text-black">+3.2°C (Nominal)</span></td>
+                                <td><span class="text-success"><i class="fa-solid fa-check me-1"></i>24,850 pts/s</span></td>
+                                <td><span class="badge bg-dark border border-info text-info">OIDC_VERIFIED</span></td>
+                                <td><span class="text-muted">Step 1: Monitoring</span></td>
+                                <td><button class="btn btn-xs btn-outline-info" onclick="inspectNode('NODE-TR-06-01')">Inspect</button></td>
+                            </tr>
+                            <tr>
+                                <td><code>NODE-TR-06-02</code></td>
+                                <td>Location-B Frigo #2</td>
+                                <td><span class="badge bg-success text-black">+4.1°C (Nominal)</span></td>
+                                <td><span class="text-success"><i class="fa-solid fa-check me-1"></i>22,100 pts/s</span></td>
+                                <td><span class="badge bg-dark border border-info text-info">OIDC_VERIFIED</span></td>
+                                <td><span class="text-muted">Step 1: Monitoring</span></td>
+                                <td><button class="btn btn-xs btn-outline-info" onclick="inspectNode('NODE-TR-06-02')">Inspect</button></td>
+                            </tr>
+                            <tr id="anomalyNodeRow">
+                                <td><code>NODE-TR-06-03</code></td>
+                                <td>Location-C Frigo #3</td>
+                                <td><span class="badge bg-warning text-black" id="node3TempBadge">+7.8°C (Near Limit)</span></td>
+                                <td><span class="text-warning"><i class="fa-solid fa-triangle-exclamation me-1"></i>High Load</span></td>
+                                <td><span class="badge bg-dark border border-info text-info">OIDC_VERIFIED</span></td>
+                                <td><span class="text-warning" id="node3Workflow">Step 2: Threshold Alert</span></td>
+                                <td><button class="btn btn-xs btn-outline-danger" onclick="triggerColdChainAnomaly()">Simulate Spike</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📌 SİSTEM ALT BİLGİ VE FOOTER -->
+    <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 font-monospace">
+        <div class="text-muted opacity-75 d-flex align-items-center gap-2" style="font-size: 0.65rem;">
+            <i class="fa-solid fa-cube text-info"></i>
+            <span>OmniPulse Enterprise Core // Powered by Doruk AVGIN</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-muted" style="font-size: 0.65rem;">Cluster Stability:</span>
+            <div class="progress" style="width: 120px; height: 5px;">
+                <div class="progress-bar bg-success" style="width: 100%" role="progressbar"></div>
+            </div>
+            <span class="text-success fw-bold" style="font-size: 0.65rem;">100% NOMINAL</span>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    <style>
+
+        /* 🚫 Universel Uppercase Blocker */
+        * {
+            text-transform: none !important;
+        }
+
+        body {
+            background-color: #05080c !important;
+            color: #c5d1de;
+        }
+
+        .btn-xs {
+            padding: 2px 6px;
+            font-size: 0.65rem;
+        }
+
+        /* 🚫 CSS UPPERCASE OVERRIDE*/
+        .page-pretitle, .badge, .btn, .card-header, th, td, span, div, h1, h2, h3, h4, h5, h6, strong, code 
+        {
+            text-transform: none !important;
+        }
+
+        body {
+            background-color: #05080c !important;
+            color: #c5d1de;
+        }
+
+        .btn-xs {
+            padding: 2px 6px;
+            font-size: 0.65rem;
+        }
+
+        /* Neon Glow Efektleri */
+        .border-success { border-color: #2fb344 !important; }
+        .border-info { border-color: #4299e1 !important; }
+        .border-warning { border-color: #f59f00 !important; }
+        .border-danger { border-color: #d63939 !important; }
+
+        /* Custom Scrollbar for Cyber Terminal */
+        #terminalLogConsole::-webkit-scrollbar {
+            width: 4px;
+        }
+        #terminalLogConsole::-webkit-scrollbar-thumb {
+            background: #4299e1;
+            border-radius: 2px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        let telemetryChart = null;
+        let chartDataPoints = [3.2, 3.4, 3.1, 3.5, 3.8, 3.6, 3.3, 3.7, 3.2, 3.5, 3.4, 3.6];
+        let timeLabels = ["11:00", "11:01", "11:02", "11:03", "11:04", "11:05", "11:06", "11:07", "11:08", "11:09", "11:10", "11:11"];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            initLiveTelemetryChart();
+            startLiveUtcClock();
+            console.log('[SYSTEM_TELEMETRY]: OmniPulse Glass-Box Architecture Initialized.');
+        });
+
+        // 📈 Live Chart.js Init (InfluxDB Stream Simulation)
+        function initLiveTelemetryChart() {
+            const ctx = document.getElementById('telemetryLiveChart').getContext('2d');
+            
+            telemetryChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: timeLabels,
+                    datasets: [
+                        {
+                            label: 'Fleet Avg Temp (°C)',
+                            data: chartDataPoints,
+                            borderColor: '#2fb344',
+                            backgroundColor: 'rgba(47, 179, 68, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.3,
+                            pointRadius: 3,
+                            pointBackgroundColor: '#2fb344'
+                        },
+                        {
+                            label: 'Upper Threshold (+8.0°C)',
+                            data: Array(12).fill(8.0),
+                            borderColor: '#d63939',
+                            borderWidth: 1.5,
+                            borderDash: [5, 5],
+                            pointRadius: 0,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 12,
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#888', font: { family: 'monospace', size: 10 } }
+                        },
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#888', font: { family: 'monospace', size: 10 } }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { color: '#ccc', font: { family: 'monospace', size: 11 } }
+                        }
+                    }
+                }
+            });
+
+            // 2 saniyede bir yeni InfluxDB noktası basma simülasyonu
+            setInterval(simulateIncomingInfluxData, 2000);
+        }
+
+        // 🔄 InfluxDB Canlı Veri Akış Simülasyonu
+        function simulateIncomingInfluxData() {
+            const now = new Date();
+            const timeStr = now.getHours().toString().padStart(2, '0') + ':' + 
+                            now.getMinutes().toString().padStart(2, '0') + ':' + 
+                            now.getSeconds().toString().padStart(2, '0');
+            
+            // +2.8°C ile +4.2°C arasında rastgele değer üret
+            const newTemp = parseFloat((Math.random() * (4.2 - 2.8) + 2.8).toFixed(2));
+
+            telemetryChart.data.labels.push(timeStr);
+            telemetryChart.data.labels.shift();
+
+            telemetryChart.data.datasets[0].data.push(newTemp);
+            telemetryChart.data.datasets[0].data.shift();
+
+            telemetryChart.update('none'); // Yumuşak geçiş
+        }
+
+        // 🕒 UTC Clock
+        function startLiveUtcClock() {
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('liveUtcClock').innerText = now.toISOString().replace('T', ' // ').substring(0, 22);
+            }, 1000);
+        }
+
+        // 🛠️ SİMÜLASYON BUTON AKSİYONLARI
+
+        function appendLog(message, type = 'info') {
+            const consoleBox = document.getElementById('terminalLogConsole');
+            const logEntry = document.createElement('div');
+            logEntry.className = `text-${type}`;
+            logEntry.innerText = `>> [${new Date().toLocaleTimeString()}]: ${message}`;
+            consoleBox.appendChild(logEntry);
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+
+        function triggerInfluxFlush() {
+            appendLog('INFLUXDB_FLUSH: Forcing 50,000 points to bucket "telemetry_fleet_v1"... Success (0.18ms)', 'success');
+            document.getElementById('kpiIngestionRate').innerText = '31,400';
+            setTimeout(() => document.getElementById('kpiIngestionRate').innerText = '24,850', 3000);
+        }
+
+        function triggerColdChainAnomaly() {
+            appendLog('CRITICAL_ANOMALY: Temperature breach detected on NODE-TR-06-03 (+9.2°C)!', 'danger');
+            document.getElementById('node3TempBadge').className = 'badge bg-danger text-white';
+            document.getElementById('node3TempBadge').innerText = '+9.2°C (BREACH!)';
+            document.getElementById('node3Workflow').innerText = 'Step 3: Dispatching Alert';
+            document.getElementById('node3Workflow').className = 'text-danger fw-bold';
+            
+            // Grafiği zıplat
+            telemetryChart.data.datasets[0].data[telemetryChart.data.datasets[0].data.length - 1] = 9.2;
+            telemetryChart.update();
+        }
+
+        function triggerMcpAudit() {
+            appendLog('MCP_AGENTIC_AI: Executing IMcpAgent.AnalyzeTelemetryPolymorphic()... Confidence: 99.1%', 'info');
+            document.getElementById('kpiMcpConfidence').innerText = '99.10%';
+        }
+
+        function triggerElsaWorkflow() {
+            appendLog('ELSA_WORKFLOW: Executing "ColdChainViolationWorkflow". Sending SignalR notification to AdminLTE dashboard.', 'warning');
+        }
+
+        function refreshKeycloakToken() {
+            appendLog('KEYCLOAK_OIDC: Handshake refreshed with Keycloak server. New JWT token issued (RS256).', 'info');
+        }
+
+        function inspectNode(nodeId) {
+            appendLog(`NODE_INSPECTOR: Opening telemetry deep-dive for ${nodeId}...`, 'success');
+        }
+    </script>
+}

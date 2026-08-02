@@ -1,0 +1,182 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>@ViewData["Title"] | Omnipulse</title>
+    
+    <!-- CORE_ASSETS_HOOK -->
+    <link rel="stylesheet" href="~/titan/css/apex-core.css" />
+    
+    <link rel="stylesheet" href="~/tabler/css/tabler.min.css" />
+    <link rel="stylesheet" href="~/tabler/css/tabler-vendors.min.css" />
+    <link rel="stylesheet" href="~/css/bridges/app-bridge-tabler.css" />
+    
+    <!-- Typography, Icons & Animation Engines -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0; 
+            overflow-x: hidden; 
+            background-color: var(--tblr-body-bg); 
+            -webkit-font-smoothing: antialiased; 
+        }
+
+        /* 🟢 PULSE GLOW ANIMATION */
+        .pulse-glow {
+            animation: pulse-glow-anim 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @@keyframes pulse-glow-anim {
+            0% { box-shadow: 0 0 0 0 rgba(47, 179, 68, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(47, 179, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(47, 179, 68, 0); }
+        }
+    </style>
+
+    /* DYNAMIC_STYLE_HOOK */
+    @RenderSection("Styles", required: false)
+</head>
+<body class="tabler-scope layout-fluid theme-dark" data-bs-theme="dark">
+    
+    <div class="page">
+        
+        <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark" style="border-right: 1px solid rgba(0, 212, 255, 0.1);">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-brand navbar-brand-autodark mt-4 mb-3 px-3">
+                    <a href="/" class="text-decoration-none d-flex align-items-center gap-3 justify-content-center">
+                        <div class="avatar avatar-sm bg-dark border border-info border-opacity-25 text-info rounded">
+                            <i class="fa-solid fa-cubes-stacked fs-4"></i>
+                        </div>
+                        <div class="d-flex flex-column align-items-start">
+                            <h3 class="fw-bold mb-0 text-white" style="letter-spacing: 1px; font-family: 'Inter', sans-serif; font-size: 1rem;">Omnipulse</h3>
+                            <span class="badge bg-dark border border-success text-success font-monospace mt-1 pulse-glow d-inline-flex align-items-center gap-1" style="font-size: 0.55rem; letter-spacing: 0.5px;">
+                                <span class="status-dot status-success status-dot-animated" style="width: 6px; height: 6px;"></span>
+                                System Active
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="collapse navbar-collapse" id="sidebar-menu">
+                    <!-- Partial Weaving: Genn_Sidebar.template buraya basılacak -->
+                    @await Html.PartialAsync("_Sidebar")
+                </div>
+            </div>
+        </aside>
+
+        <div class="page-wrapper" style="min-height: 100vh;">
+            
+            <!-- Otonom Top Header (Cyberpunk Telemetry & User Menu) -->
+            <header class="navbar navbar-expand-md d-none d-lg-flex d-print-none border-bottom border-secondary border-opacity-25" style="background: rgba(10, 10, 10, 0.9); backdrop-filter: blur(10px);">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar-menu">
+                        <div class="d-flex align-items-center gap-4">
+                            <!-- Global Arama Kutusu (Sektörel Uyumlu) -->
+                            <div class="input-icon d-none d-xl-block" style="width: 250px;">
+                                <span class="input-icon-addon">
+                                    <i class="fa-solid fa-magnifying-glass text-secondary text-opacity-50"></i>
+                                </span>
+                                <input type="text" class="form-control form-control-sm bg-dark border-secondary border-opacity-25 text-white" placeholder="Search within the system..." aria-label="Search" style="font-size: 0.75rem;" />
+                            </div>
+                            <!-- Sistem Zaman Bilgisi -->
+                            <div class="d-flex align-items-center gap-2 text-muted">
+                                <i class="fa-regular fa-clock text-secondary small"></i>
+                                <span class="font-monospace small" style="font-size: 0.7rem; letter-spacing: 0.5px;">System Time: @DateTime.UtcNow.ToString("yyyy-MM-dd") UTC</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="navbar-nav flex-row order-md-last align-items-center gap-3">
+                        <!-- Bildirim Merkezi ve Güvenlik Sinyalleri -->
+                        <div class="d-none d-md-flex align-items-center gap-3 border-end border-secondary border-opacity-25 pe-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="status-dot status-success status-dot-animated"></div>
+                                <span class="font-monospace text-success small" style="font-size: 0.7rem; letter-spacing: 0.5px;"><i class="fa-solid fa-shield-halved me-1"></i>Secure Connection</span>
+                            </div>
+                            <a href="#" class="text-secondary hover-info position-relative" title="Bildirimler">
+                                <i class="fa-regular fa-bell fs-5"></i>
+                                <span class="badge bg-danger badge-notification" style="width: 6px; height: 6px; position: absolute; top: -2px; right: -2px; border-radius: 50%;"></span>
+                            </a>
+                        </div>
+                        <!-- Kullanıcı Kontrol Paneli -->
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Kullanıcı Menüsü">
+                                <span class="avatar avatar-sm border border-info border-opacity-50" style="background-image: url('https://ui-avatars.com/api/?name=Admin&background=000&color=00d4ff');"></span>
+                                <div class="d-none d-xl-block ps-2">
+                                    <div class="font-monospace text-info fw-bold" style="font-size: 0.75rem; letter-spacing: 0.5px;">System Administrator</div>
+                                    <div class="mt-1 small text-secondary font-monospace" style="font-size: 0.65rem;">Full Access</div>
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow bg-black border-secondary border-opacity-50 shadow-lg">
+                                <a href="#" class="dropdown-item text-secondary"><i class="fa-solid fa-user-gear me-2 text-info"></i> Profile Settings</a>
+                                <div class="dropdown-divider border-secondary opacity-25"></div>
+                                <a href="#" class="dropdown-item text-danger"><i class="fa-solid fa-power-off me-2"></i> End Session</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="page-body m-0 p-4 d-flex flex-column flex-grow-1">
+                <div class="container-fluid p-0 flex-grow-1 d-flex flex-column">
+                    @RenderBody()
+                </div>
+            </div>
+            
+            <footer class="footer footer-transparent d-print-none mt-auto border-top border-secondary border-opacity-25" style="background-color: #050505;">
+                <div class="container-fluid">
+                    <div class="row text-center align-items-center flex-row-reverse">
+                        <div class="col-lg-auto ms-lg-auto">
+                            <ul class="list-inline list-inline-dots mb-0 font-monospace text-muted" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                                <li class="list-inline-item"><a href="#" class="link-secondary text-decoration-none">System Documentation</a></li>
+                                <li class="list-inline-item"><a href="#" class="link-secondary text-decoration-none">API Data Link</a></li>
+                                <li class="list-inline-item">Platform Version v1.0.0</li>
+                            </ul>
+                        </div>
+                        <div class="col-12 col-lg-auto mt-3 mt-lg-0 font-monospace text-secondary" style="font-size: 0.7rem; letter-spacing: 0.5px;">
+                            &copy; @DateTime.Now.Year OmniPulse | All Rights Reserved.
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!-- CORE_SCRIPTS_HOOK -->
+    
+    <!-- System Engines & Vendors -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="~/tabler/js/tabler.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script>
+        // AOS (Animate On Scroll) Motoru Kuantum Ateşlemesi
+        $(document).ready(function() { 
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ 
+                    duration: 800, 
+                    once: true, 
+                    easing: 'ease-out-cubic' 
+                }); 
+            }
+        });
+    </script>
+
+    <!-- DYNAMIC_SCRIPT_HOOK -->
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

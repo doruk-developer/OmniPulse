@@ -1,0 +1,376 @@
+﻿@{
+    ViewData["Title"] = "Vehicle & Device Inventory // Global Audit Forensics";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid py-3" data-aos="fade-in">
+    
+    <!-- 🔴 ÜST BAŞLIK & DONANIM/ADLİ TIP ROZETLERİ -->
+    <div class="page-header mb-3 pb-2 border-bottom border-secondary border-opacity-25">
+        <div class="row align-items-center g-2">
+            <div class="col-md-7">
+                <div class="page-pretitle font-monospace mb-1 text-danger opacity-75 d-flex align-items-center gap-2" style="font-size: 0.7rem; letter-spacing: 1.5px;">
+                    <i class="fa-solid fa-microchip text-danger"></i>
+                    <span>OMNIPULSE HARDWARE MATRIX // EF CORE INTERCEPTOR AUDIT FORENSICS</span>
+                </div>
+                <h2 class="page-title font-monospace fw-bold text-white m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+                    <span class="status-dot status-danger status-dot-animated" style="width: 12px; height: 12px;"></span>
+                    Vehicle & IoT Device Inventory (Global Audit Forensics)
+                </h2>
+            </div>
+            
+            <div class="col-md-5 text-end">
+                <div class="d-flex align-items-center justify-content-md-end gap-2 font-monospace">
+                    <div class="badge bg-black border border-danger text-danger p-2 text-start shadow-sm">
+                        <div class="text-muted" style="font-size: 0.55rem;">HARDWARE PAIRING</div>
+                        <span><i class="fa-solid fa-link me-1"></i>150 / 150 IoT SENSORS PAIRED</span>
+                    </div>
+                    <div class="badge bg-black border border-warning text-warning p-2 text-start shadow-sm">
+                        <div class="text-muted" style="font-size: 0.55rem;">AUDIT TRAIL</div>
+                        <span><i class="fa-solid fa-shield-cat me-1"></i>EF INTERCEPTOR ACTIVE</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🏷️ GLASS-BOX ARCHITECTURE BADGES (DONANIM & EF CORE AUDIT ODAKLI 4 OOP PRENSİBİ) -->
+    <div class="row g-2 mb-3 font-monospace">
+        <div class="col-12">
+            <div class="card bg-black border-secondary p-2 shadow-sm">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2" style="font-size: 0.65rem;">
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <span class="text-muted fw-bold me-1"><i class="fa-solid fa-microchip text-danger me-1"></i>INVENTORY_MAPPING:</span>
+                        
+                        <!-- Encapsulation -->
+                        <span class="badge bg-dark border border-danger text-danger p-2" data-bs-toggle="tooltip" title="Encapsulation: Cihaz MAC adresi ve donanım UUID bilgileri private encapsulation ile korundu.">
+                            <i class="fa-solid fa-key text-danger me-1"></i>Encapsulation: Encapsulated Hardware UUID
+                        </span>
+
+                        <!-- Abstraction -->
+                        <span class="badge bg-dark border border-info text-info p-2" data-bs-toggle="tooltip" title="Abstraction: IGenericRepository<TDevice> soyutlaması.">
+                            <i class="fa-solid fa-cubes text-info me-1"></i>Abstraction: IGenericRepository&lt;Device&gt;
+                        </span>
+
+                        <!-- Inheritance -->
+                        <span class="badge bg-dark border border-warning text-warning p-2" data-bs-toggle="tooltip" title="Inheritance: BaseEntity'den türeyen Audit alanları (CreatedBy, ModifiedBy, IsDeleted).">
+                            <i class="fa-solid fa-sitemap text-warning me-1"></i>Inheritance: BaseEntity (Audit Columns)
+                        </span>
+
+                        <!-- Polymorphism -->
+                        <span class="badge bg-dark border border-success text-success p-2" data-bs-toggle="tooltip" title="Polymorphism: IDeviceCommunicator üzerinden CAN-Bus, MQTT ve Modbus protokolleri.">
+                            <i class="fa-solid fa-network-wired text-success me-1"></i>Polymorphism: IDeviceCommunicator (MQTT/CAN)
+                        </span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 text-muted">
+                        <span class="badge bg-dark border border-secondary text-danger"><i class="fa-solid fa-filter me-1"></i>SoftDelete QueryFilter: ENABLED</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🛠️ SIMULATION CONTROL TOOLBAR (ADLİ TIP VE DONANIM AKSİYON BUTONLARI) -->
+    <div class="card bg-black border-secondary mb-4 font-monospace">
+        <div class="card-body p-2">
+            <div class="row align-items-center g-2">
+                <div class="col-md-3">
+                    <span class="text-danger fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-fingerprint me-1"></i>FORENSIC & HARDWARE ACTIONS
+                    </span>
+                </div>
+                <div class="col-md-9 text-md-end d-flex flex-wrap justify-content-md-end gap-2">
+                    <button class="btn btn-sm btn-outline-danger" onclick="verifyAuditIntegrity()">
+                        <i class="fa-solid fa-shield-halved me-1"></i>Verify Log Integrity (SHA-512)
+                    </button>
+                    <button class="btn btn-sm btn-outline-warning" onclick="simulateSoftDelete()">
+                        <i class="fa-solid fa-trash-arrow-up me-1"></i>Test Soft-Delete Interceptor
+                    </button>
+                    <button class="btn btn-sm btn-outline-info" onclick="generateQrTag()">
+                        <i class="fa-solid fa-qrcode me-1"></i>Generate QR Asset Tag
+                    </button>
+                    <button class="btn btn-sm btn-outline-success" onclick="pairNewIotSensor()">
+                        <i class="fa-solid fa-plug-circle-plus me-1"></i>Simulate IoT Sensor Pairing
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="exportAuditLogExcel()">
+                        <i class="fa-solid fa-file-excel me-1"></i>Export Forensic Report
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📊 DONANIM ENVANTER KARTLARI VE EF CORE INTERCEPTOR LOG CONSOLE -->
+    <div class="row g-3 mb-4 font-monospace">
+        <!-- SOL (7 KOLON): IoT SENSÖR & ARAÇ EŞLEŞTİRME MATRİSİ -->
+        <div class="col-lg-7">
+            <div class="card bg-black border-secondary h-100 shadow-sm">
+                <div class="card-header bg-dark border-secondary p-2 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-boxes-stacked text-info"></i>
+                        <span class="text-white fw-bold" style="font-size: 0.8rem;">VEHICLE TO IOT SENSOR HARDWARE PAIRING MATRIX</span>
+                    </div>
+                    <span class="badge bg-black border border-info text-info" style="font-size: 0.6rem;">CAN-BUS / MQTT / LORAWAN</span>
+                </div>
+
+                <div class="card-body p-2">
+                    <div class="row g-2">
+                        <!-- Cihaz Kartı 1 -->
+                        <div class="col-md-6">
+                            <div class="p-2 border border-info border-opacity-30 rounded bg-dark h-100">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="text-info fw-bold"><i class="fa-solid fa-truck me-1"></i>NODE-TR-06-01</span>
+                                    <span class="badge bg-success text-black">ONLINE</span>
+                                </div>
+                                <div class="text-muted" style="font-size: 0.6rem;">
+                                    <div><strong>Vehicle:</strong> Location-A Frigo #1</div>
+                                    <div><strong>Sensor Hardware:</strong> ApexThermal-v4 (Serial: <code>S-98214</code>)</div>
+                                    <div><strong>Protocol:</strong> MQTT over TLS (Port 8883)</div>
+                                    <div><strong>Influx Measurement:</strong> <code>thermal_telemetry</code></div>
+                                </div>
+                                <div class="mt-2 pt-1 border-top border-secondary d-flex justify-content-between align-items-center">
+                                    <span class="text-success" style="font-size: 0.55rem;"><i class="fa-solid fa-check me-1"></i>Calibrated: 2026.05.10</span>
+                                    <button class="btn btn-xs btn-outline-info" onclick="inspectHardware('S-98214')">QR Tag</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cihaz Kartı 2 -->
+                        <div class="col-md-6">
+                            <div class="p-2 border border-info border-opacity-30 rounded bg-dark h-100">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="text-info fw-bold"><i class="fa-solid fa-truck me-1"></i>NODE-TR-06-02</span>
+                                    <span class="badge bg-success text-black">ONLINE</span>
+                                </div>
+                                <div class="text-muted" style="font-size: 0.6rem;">
+                                    <div><strong>Vehicle:</strong> Location-B Frigo #2</div>
+                                    <div><strong>Sensor Hardware:</strong> ApexThermal-v4 (Serial: <code>S-98215</code>)</div>
+                                    <div><strong>Protocol:</strong> CAN-Bus 2.0B (High-Speed)</div>
+                                    <div><strong>Influx Measurement:</strong> <code>spatial_telemetry</code></div>
+                                </div>
+                                <div class="mt-2 pt-1 border-top border-secondary d-flex justify-content-between align-items-center">
+                                    <span class="text-success" style="font-size: 0.55rem;"><i class="fa-solid fa-check me-1"></i>Calibrated: 2026.06.01</span>
+                                    <button class="btn btn-xs btn-outline-info" onclick="inspectHardware('S-98215')">QR Tag</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cihaz Kartı 3 -->
+                        <div class="col-md-6">
+                            <div class="p-2 border border-warning border-opacity-30 rounded bg-dark h-100">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <span class="text-warning fw-bold"><i class="fa-solid fa-plane-up me-1"></i>NODE-TR-06-03</span>
+                                    <span class="badge bg-warning text-black">HIGH LOAD</span>
+                                </div>
+                                <div class="text-muted" style="font-size: 0.6rem;">
+                                    <div><strong>Vehicle:</strong> Location-C Frigo #3</div>
+                                    <div><strong>Sensor Hardware:</strong> ApexThermal-PRO (Serial: <code>S-99100</code>)</div>
+                                    <div><strong>Protocol:</strong> Modbus RTU / RS485</div>
+                                    <div><strong>Influx Measurement:</strong> <code>defense_telemetry</code></div>
+                                </div>
+                                <div class="mt-2 pt-1 border-top border-secondary d-flex justify-content-between align-items-center">
+                                    <span class="text-warning" style="font-size: 0.55rem;"><i class="fa-solid fa-triangle-exclamation me-1"></i>Calib Due in 5 Days</span>
+                                    <button class="btn btn-xs btn-outline-warning" onclick="inspectHardware('S-99100')">QR Tag</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cihaz Kartı 4 (Yeni Eklenen) -->
+                        <div class="col-md-6" id="newSensorCardContainer">
+                            <div class="p-2 border border-secondary border-opacity-30 rounded bg-dark h-100 d-flex flex-column justify-content-center align-items-center text-center">
+                                <i class="fa-solid fa-plus-circle text-muted mb-1 fs-4"></i>
+                                <span class="text-muted" style="font-size: 0.65rem;">Unpaired IoT Port Ready</span>
+                                <button class="btn btn-xs btn-outline-success mt-2" onclick="pairNewIotSensor()">+ Pair New Sensor</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAĞ (5 KOLON): EF CORE AUDIT INTERCEPTOR FORENSICS LOG -->
+        <div class="col-lg-5">
+            <div class="card bg-black border-danger h-100 shadow-sm">
+                <div class="card-header bg-dark border-danger p-2 d-flex align-items-center justify-content-between">
+                    <span class="text-danger fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-fingerprint me-1"></i>EF CORE INTERCEPTOR AUDIT TRAIL
+                    </span>
+                    <span class="badge bg-danger text-white" style="font-size: 0.55rem;">IMMUTABLE_LOG</span>
+                </div>
+
+                <div class="card-body p-2 d-flex flex-column justify-content-between">
+                    <div class="p-2 bg-dark rounded border border-secondary font-monospace" style="font-size: 0.62rem; height: 260px; overflow-y: auto;" id="forensicAuditLogConsole">
+                        <div class="text-danger">>> [EF_INTERCEPTOR]: SaveChangesAsync() intercepted. Audit trail activated.</div>
+                        <div class="text-info">>> [AUDIT_STAMP]: ModifiedBy='Doruk_Avgın', ModifiedDate=2026-07-27T14:45:00Z.</div>
+                        <div class="text-warning">>> [SOFT_DELETE]: QueryFilter applied: IsDeleted == false. Soft-deleted entities hidden from UI.</div>
+                        <div class="text-success">>> [QUANTUM_SAFE_HASH]: Signature APEX-Q-8921A-SHA512 verified for Hardware Ledger.</div>
+                    </div>
+
+                    <!-- Instant QR Preview Box -->
+                    <div class="mt-2 p-2 border border-secondary rounded bg-dark d-flex align-items-center justify-content-between" id="qrPreviewBox">
+                        <div>
+                            <div class="text-info fw-bold" style="font-size: 0.65rem;">QRCoder Hardware Tag</div>
+                            <div class="text-muted" style="font-size: 0.55rem;">Serial: S-99100 // Node #3</div>
+                        </div>
+                        <div class="bg-white p-1 rounded">
+                            <i class="fa-solid fa-qrcode fs-2 text-black"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌐 ADLİ TIP VE VERİ TABANI SORGULAMA TABLOSU -->
+    <div class="row g-3">
+        <div class="col-12 font-monospace">
+            <div class="card bg-black border-secondary shadow-sm">
+                <div class="card-header bg-dark border-secondary p-2 d-flex align-items-center justify-content-between">
+                    <span class="text-white fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-database me-2 text-danger"></i>SQL SERVER & INFLUXDB DUAL-DATABASE AUDIT FORENSICS TABLE
+                    </span>
+                    <span class="badge bg-black border border-danger text-danger" style="font-size: 0.6rem;">IMMUTABLE REPOSITORY</span>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-dark table-vcenter card-table table-hover align-middle mb-0" style="font-size: 0.7rem;">
+                        <thead>
+                            <tr class="text-muted border-secondary">
+                                <th>HARDWARE UUID</th>
+                                <th>VEHICLE PLATE</th>
+                                <th>CREATED BY</th>
+                                <th>CREATED DATE (UTC)</th>
+                                <th>MODIFIED BY</th>
+                                <th>SOFT-DELETE STATUS</th>
+                                <th>SECURITY HASH</th>
+                            </tr>
+                        </thead>
+                        <tbody id="auditForensicsTableBody">
+                            <tr>
+                                <td><code>UUID-9821-4A</code></td>
+                                <td>01 Data 01</td>
+                                <td><code>system_seed</code></td>
+                                <td>2026-05-10 08:00</td>
+                                <td><code>Doruk_Avgın</code></td>
+                                <td><span class="badge bg-success text-black">IsDeleted = false</span></td>
+                                <td><code>APEX-Q-SHA512-OK</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>UUID-9821-4B</code></td>
+                                <td>02 Data 02</td>
+                                <td><code>system_seed</code></td>
+                                <td>2026-06-01 09:30</td>
+                                <td><code>Doruk_Avgın</code></td>
+                                <td><span class="badge bg-success text-black">IsDeleted = false</span></td>
+                                <td><code>APEX-Q-SHA512-OK</code></td>
+                            </tr>
+                            <tr id="softDeleteTargetRow">
+                                <td><code>UUID-9910-0C</code></td>
+                                <td>03 Data 03</td>
+                                <td><code>admin_user</code></td>
+                                <td>2026-07-20 11:15</td>
+                                <td><code>Doruk_Avgın</code></td>
+                                <td><span class="badge bg-success text-black" id="softDeleteBadge">IsDeleted = false</span></td>
+                                <td><code>APEX-Q-SHA512-OK</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📌 FOOTER -->
+    <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 font-monospace">
+        <div class="text-muted opacity-75 d-flex align-items-center gap-2" style="font-size: 0.65rem;">
+            <i class="fa-solid fa-fingerprint text-danger"></i>
+            <span>OmniPulse Hardware & Audit Forensics Engine v3.0 // Powered by EF Core Interceptors & QRCoder</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-muted" style="font-size: 0.65rem;">Audit Integrity:</span>
+            <span class="text-danger fw-bold" style="font-size: 0.65rem;"><i class="fa-solid fa-lock me-1"></i>100% IMMUTABLE</span>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    <style>
+        body {
+            background-color: #050505 !important;
+            color: #c5d1de;
+        }
+
+        #forensicAuditLogConsole::-webkit-scrollbar {
+            width: 4px;
+        }
+        #forensicAuditLogConsole::-webkit-scrollbar-thumb {
+            background: #d63939;
+            border-radius: 2px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log('[AUDIT_FORENSICS]: EF Core Interceptor & Hardware Inventory Matrix Active.');
+        });
+
+        function appendForensicLog(msg, type = 'danger') {
+            const consoleBox = document.getElementById('forensicAuditLogConsole');
+            const entry = document.createElement('div');
+            entry.className = `text-${type}`;
+            entry.innerText = `>> [${new Date().toLocaleTimeString()}]: ${msg}`;
+            consoleBox.appendChild(entry);
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+
+        // 🛠️ ADLİ TIP & DONANIM AKSİYONLARI
+
+        function verifyAuditIntegrity() {
+            appendForensicLog('SHA-512_INTEGRITY: Verifying cryptographic hashes across all 150 hardware nodes... OK!', 'success');
+        }
+
+        function simulateSoftDelete() {
+            appendForensicLog('INTERCEPTOR_SOFT_DELETE: Intercepting SaveChangesAsync(). Entity [UUID-9910-0C] flagged as IsDeleted=true. Global QueryFilter will hide it from future queries.', 'warning');
+            
+            const badge = document.getElementById('softDeleteBadge');
+            badge.className = 'badge bg-danger text-white';
+            badge.innerText = 'IsDeleted = true (SOFT DELETED)';
+        }
+
+        function generateQrTag() {
+            appendForensicLog('QRCODER_GENERATE: Generated Canvas QR Asset Tag for Node #3. Redirect URL: /Vehicle_Device_Inventory/Inspect/UUID-9910-0C', 'info');
+            alert('QRCoder Asset Tag Generated!\n\nPayload: https://omnipulse.local/inventory/UUID-9910-0C\nStatus: Signed with QuantumSafeMinter SHA-512');
+        }
+
+        function pairNewIotSensor() {
+            appendForensicLog('IOT_HOT_PLUG: New ApexThermal-PRO sensor detected on MQTT broker. Pairing with NODE-TR-06-04... Success!', 'success');
+            
+            const container = document.getElementById('newSensorCardContainer');
+            container.innerHTML = `
+                <div class="p-2 border border-success border-opacity-30 rounded bg-dark h-100 fade-in">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-success fw-bold"><i class="fa-solid fa-truck me-1"></i>NODE-TR-06-04</span>
+                        <span class="badge bg-success text-black">PAIRED NOW</span>
+                    </div>
+                    <div class="text-muted" style="font-size: 0.6rem;">
+                        <div><strong>Vehicle:</strong> Ostim Lojistik Frigo #4</div>
+                        <div><strong>Sensor Hardware:</strong> ApexThermal-v4 (Serial: <code>S-99201</code>)</div>
+                        <div><strong>Protocol:</strong> MQTT over TLS</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function exportAuditLogExcel() {
+            appendForensicLog('CLOSEDXML_EXPORT: ClosedXML generated Excel Forensic Report with immutable timestamps.', 'info');
+        }
+
+        function inspectHardware(serial) {
+            appendForensicLog(`HARDWARE_INSPECTOR: Fetching EEPROM and calibration ledger for Serial ${serial}...`, 'info');
+        }
+    </script>
+}

@@ -1,0 +1,330 @@
+﻿@{
+    ViewData["Title"] = "Anomaly Alert Center // Drift Alarm Matrix";
+    Layout = "_Layout";
+}
+
+<div class="container-fluid py-3" data-aos="fade-in">
+    
+    <!-- 🔴 WAR ROOM ÜST BAŞLIK & THREAT LEVEL GÖSTERGESİ -->
+    <div class="page-header mb-3 pb-2 border-bottom border-danger border-opacity-30">
+        <div class="row align-items-center g-2">
+            <div class="col-md-7">
+                <div class="page-pretitle font-monospace mb-1 text-danger opacity-75 d-flex align-items-center gap-2" style="font-size: 0.7rem; letter-spacing: 1.5px;">
+                    <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+                    <span>OmniPulse Incident Mitigation Core // Elsa Workflows & MCP Agentic AI</span>
+                </div>
+                <h2 class="page-title font-monospace fw-bold text-white m-0 d-flex align-items-center gap-2" style="font-size: 1.6rem;">
+                    <span class="status-dot status-danger status-dot-animated" style="width: 14px; height: 14px;"></span>
+                    Anomaly & Cold-Chain Alert War Room
+                </h2>
+            </div>
+            
+            <div class="col-md-5 text-end font-monospace">
+                <div class="d-flex align-items-center justify-content-md-end gap-2">
+                    <div class="badge bg-black border border-danger text-danger p-2 text-start shadow-sm">
+                        <div class="text-muted" style="font-size: 0.55rem;">System Threat Level</div>
+                        <span class="fs-6 fw-bold" id="threatLevelDisplay"><i class="fa-solid fa-skull me-1 text-danger"></i>Threat: @ViewBag.ThreatLevel (Elevated Drift)</span>
+                    </div>
+                    <div class="badge bg-black border border-warning text-warning p-2 text-start shadow-sm">
+                        <div class="text-muted" style="font-size: 0.55rem;">Active Tickets</div>
+                        <span class="fs-6 fw-bold" id="activeTicketCount">3 Critical Incidents</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🏷️ GLASS-BOX ARCHITECTURE BADGES -->
+    <div class="row g-2 mb-3 font-monospace">
+        <div class="col-12">
+            <div class="card bg-black border-secondary p-2 shadow-sm">
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2" style="font-size: 0.65rem;">
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <span class="text-muted fw-bold me-1"><i class="fa-solid fa-gears text-warning me-1"></i>Mitigation Stack:</span>
+                        
+                        <!-- Encapsulation -->
+                        <span class="badge bg-dark border border-danger text-danger p-2" data-bs-toggle="tooltip" title="Encapsulation: Alarm durumları ve kriz seviyeleri OmniPulseStateMachine içinde kapsüllendi.">
+                            <i class="fa-solid fa-shield-halved text-danger me-1"></i>Encapsulation: Saga State Machine
+                        </span>
+
+                        <!-- Abstraction -->
+                        <span class="badge bg-dark border border-warning text-warning p-2" data-bs-toggle="tooltip" title="Abstraction: IAlertNotificationService ile SMS, Email ve SignalR kanalları soyutlandı.">
+                            <i class="fa-solid fa-bullhorn text-warning me-1"></i>Abstraction: IAlertNotificationService
+                        </span>
+
+                        <!-- Inheritance -->
+                        <span class="badge bg-dark border border-info text-info p-2" data-bs-toggle="tooltip" title="Inheritance: BaseAlertRule ata sınıfından türetilen termal ve spasyal alarm kuralları.">
+                            <i class="fa-solid fa-sitemap text-info me-1"></i>Inheritance: BaseAlertRule
+                        </span>
+
+                        <!-- Polymorphism -->
+                        <span class="badge bg-dark border border-success text-success p-2" data-bs-toggle="tooltip" title="Polymorphism: IMcpAgent üzerinden anomali türüne göre polimorfik müdahale kararı.">
+                            <i class="fa-solid fa-brain text-success me-1"></i>Polymorphism: IMcpAgent.Mitigate()
+                        </span>
+                    </div>
+
+                    <div class="d-flex align-items-center gap-2 text-muted">
+                        <span class="badge bg-dark border border-secondary text-danger"><i class="fa-solid fa-signal me-1"></i>SignalR Redis Backplane: Active</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🛠️ WAR ROOM EMERGENCY TOOLBAR -->
+    <div class="card bg-black border-danger mb-4 font-monospace">
+        <div class="card-body p-2">
+            <div class="row align-items-center g-2">
+                <div class="col-md-3">
+                    <span class="text-danger fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-bell-slash me-1"></i>Emergency War Room Controls
+                    </span>
+                </div>
+                <div class="col-md-9 text-md-end d-flex flex-wrap justify-content-md-end gap-2">
+                    <button class="btn btn-sm btn-outline-danger" onclick="silenceAllAlarms()">
+                        <i class="fa-solid fa-volume-xmark me-1"></i>Silence All Alarms (Acknowledge)
+                    </button>
+                    <button class="btn btn-sm btn-outline-warning" onclick="triggerEmergencyElsaWorkflow()">
+                        <i class="fa-solid fa-bolt-lightning me-1"></i>Force Elsa Emergency Workflow
+                    </button>
+                    <button class="btn btn-sm btn-outline-info" onclick="executeMcpCognitiveMitigation()">
+                        <i class="fa-solid fa-brain me-1"></i>Execute MCP Cognitive Mitigation
+                    </button>
+                    <button class="btn btn-sm btn-outline-success" onclick="simulateIncidentResolution()">
+                        <i class="fa-solid fa-check-double me-1"></i>Simulate Incident Resolved
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary" onclick="exportIncidentPdf()">
+                        <i class="fa-solid fa-file-pdf me-1"></i>Export Incident Ledger
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📊 DRIFT ALARM MATRIX VE MCP AI COGNITIVE MITIGATION CONSOLE -->
+    <div class="row g-3 mb-4 font-monospace">
+        
+        <!-- SOL (7 KOLON): DRIFT ALARM MATRIX & LIVE INCIDENT TICKET QUEUE -->
+        <div class="col-lg-7">
+            <div class="card bg-black border-danger h-100 shadow-sm">
+                <div class="card-header bg-dark border-danger p-2 d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa-solid fa-fire text-danger"></i>
+                        <span class="text-white fw-bold" style="font-size: 0.8rem;">Real-Time Drift Alarm Matrix (Active Incident Tickets)</span>
+                    </div>
+                    <span class="badge bg-danger text-white" style="font-size: 0.6rem;">Priority Queue</span>
+                </div>
+
+                <div class="card-body p-2">
+                    <div class="table-responsive">
+                        <table class="table table-dark table-hover align-middle mb-0" style="font-size: 0.7rem;">
+                            <thead>
+                                <tr class="text-muted border-secondary">
+                                    <th>Incident ID</th>
+                                    <th>Vehicle / Node</th>
+                                    <th>Anomaly Type</th>
+                                    <th>Breach Value</th>
+                                    <th>Elsa Workflow State</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="incidentTicketTableBody">
+                                <tr id="incidentRow1" class="table-danger text-white">
+                                    <td><code>INC-2026-0891</code></td>
+                                    <td><strong>NODE-TR-06-03 (Location-C)</strong></td>
+                                    <td><span class="badge bg-danger text-white">Thermal Breach</span></td>
+                                    <td><strong class="text-danger">+9.2°C (&gt; +8.0°C)</strong></td>
+                                    <td><span class="text-warning fw-bold" id="elsaStepRow1">Step 2: Motor Override</span></td>
+                                    <td><button class="btn btn-xs btn-outline-light" onclick="mitigateSingleIncident('INC-2026-0891')">Mitigate</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>INC-2026-0892</code></td>
+                                    <td>NODE-TR-06-01 (Location-A)</td>
+                                    <td><span class="badge bg-warning text-black">Door Open &gt; 5m</span></td>
+                                    <td><span class="text-warning">Door: OPEN (6m 12s)</span></td>
+                                    <td><span class="text-muted">Step 1: Driver Alert</span></td>
+                                    <td><button class="btn btn-xs btn-outline-info" onclick="mitigateSingleIncident('INC-2026-0892')">Mitigate</button></td>
+                                </tr>
+                                <tr>
+                                    <td><code>INC-2026-0893</code></td>
+                                    <td>NODE-TR-06-02 (Location-B)</td>
+                                    <td><span class="badge bg-info text-black">GPS Route Drift</span></td>
+                                    <td><span class="text-info">Off-Route: 2.4 km</span></td>
+                                    <td><span class="text-muted">Step 1: Geofence Check</span></td>
+                                    <td><button class="btn btn-xs btn-outline-info" onclick="mitigateSingleIncident('INC-2026-0893')">Mitigate</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SAĞ (5 KOLON): MCP AGENTIC AI & ELSA WORKFLOW MITIGATION WAR ROOM CONSOLE -->
+        <div class="col-lg-5 font-monospace">
+            <div class="card bg-black border-warning h-100 shadow-sm">
+                <div class="card-header bg-dark border-warning p-2 d-flex align-items-center justify-content-between">
+                    <span class="text-warning fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-brain me-1"></i>MCP Agentic AI Reasoning Chain
+                    </span>
+                    <span class="badge bg-warning text-black" style="font-size: 0.55rem;">Cognitive Mitigation</span>
+                </div>
+
+                <div class="card-body p-2 d-flex flex-column justify-content-between">
+                    <!-- Real-Time AI Agent Terminal Output -->
+                    <div class="p-2 bg-dark rounded border border-secondary" style="font-size: 0.62rem; height: 240px; overflow-y: auto;" id="mcpReasoningConsole">
+                        <div class="text-warning">>> [MCP_AGENT]: Analyzing NODE-TR-06-03 thermal drift (+9.2°C).</div>
+                        <div class="text-info">>> [REASONING_CHAIN]: Thermal inertia indicates compressor failure risk. Ambient temp = +32°C.</div>
+                        <div class="text-danger">>> [RECOMMENDED_ACTION]: Activate secondary Peltier cooling unit & reroute vehicle to nearest satellite hub.</div>
+                        <div class="text-success">>> [ELSA_WORKFLOW]: Auto-executing 'EmergencyCoolingOverride' step via MassTransit.</div>
+                    </div>
+
+                    <!-- AI Mitigation Confidence Bar -->
+                    <div class="mt-2 p-2 border border-warning border-opacity-30 rounded bg-dark">
+                        <div class="d-flex justify-content-between text-warning fw-bold" style="font-size: 0.65rem;">
+                            <span>AI Mitigation Confidence:</span>
+                            <span id="aiConfidenceValue">98.85%</span>
+                        </div>
+                        <div class="progress mt-1" style="height: 5px;">
+                            <div class="progress-bar bg-warning" style="width: 98%" id="aiConfidenceProgressBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🌐 ELSA WORKFLOW STEP-BY-STEP EXECUTOR PANEL -->
+    <div class="row g-3">
+        <div class="col-12 font-monospace">
+            <div class="card bg-black border-secondary shadow-sm">
+                <div class="card-header bg-dark border-secondary p-2 d-flex align-items-center justify-content-between">
+                    <span class="text-white fw-bold" style="font-size: 0.75rem;">
+                        <i class="fa-solid fa-diagram-project me-2 text-warning"></i>Elsa Workflow Automation Pipeline (Automated Incident Dispatch)
+                    </span>
+                    <span class="badge bg-dark border border-warning text-warning" style="font-size: 0.6rem;">Inheritance (BaseWorkflowStep)</span>
+                </div>
+
+                <div class="card-body p-3">
+                    <div class="row text-center g-2" style="font-size: 0.65rem;">
+                        <div class="col-md-3">
+                            <div class="p-2 border border-success rounded bg-dark">
+                                <div class="text-success fw-bold"><i class="fa-solid fa-check-circle me-1"></i>Step 1: Threshold Breach</div>
+                                <div class="text-muted opacity-75 mt-1">Temperature > +8.0°C detected via InfluxDB Flux Query.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border border-warning rounded bg-dark" id="workflowStep2Box">
+                                <div class="text-warning fw-bold"><i class="fa-solid fa-spinner fa-spin me-1"></i>Step 2: Motor Override</div>
+                                <div class="text-muted opacity-75 mt-1">Sending CAN-bus command to force secondary cooler.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border border-secondary rounded bg-dark" id="workflowStep3Box">
+                                <div class="text-muted"><i class="fa-solid fa-envelope me-1"></i>Step 3: Driver & Tech Dispatch</div>
+                                <div class="text-muted opacity-50 mt-1">Pushing SMS and SignalR WebSocket notification.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="p-2 border border-secondary rounded bg-dark" id="workflowStep4Box">
+                                <div class="text-muted"><i class="fa-solid fa-flag-checkered me-1"></i>Step 4: Audit Closure</div>
+                                <div class="text-muted opacity-50 mt-1">Writing incident closure hash to EF Core Audit Trail.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 📌 FOOTER -->
+    <div class="mt-4 pt-3 border-top border-secondary border-opacity-25 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 font-monospace">
+        <div class="text-muted opacity-75 d-flex align-items-center gap-2" style="font-size: 0.65rem;">
+            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
+            <span>OmniPulse Incident War Room v3.0 // Elsa Workflows & MCP Agentic AI Core</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-muted" style="font-size: 0.65rem;">War Room Readiness:</span>
+            <span class="text-danger fw-bold" style="font-size: 0.65rem;"><i class="fa-solid fa-shield-virus me-1"></i>Maximum Vigilance</span>
+        </div>
+    </div>
+
+</div>
+
+@section Styles {
+    <style>
+        body {
+            background-color: #050505 !important;
+            color: #c5d1de;
+        }
+
+        /* 🚫 CSS UPPERCASE OVERRIDE: Tabler'ın harfleri zorla büyük yapıp noktalı 'İ' üretmesini engeller */
+        .page-pretitle, .badge, .btn, .card-header, th, td, span, div, h1, h2, h3, h4, h5, h6, strong, code {
+            text-transform: none !important;
+        }
+
+        #mcpReasoningConsole::-webkit-scrollbar {
+            width: 4px;
+        }
+        #mcpReasoningConsole::-webkit-scrollbar-thumb {
+            background: #f59f00;
+            border-radius: 2px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            console.log('[ANOMALY_CENTER]: Elsa Workflows & MCP Agentic AI Mitigation Active.');
+        });
+
+        function appendMcpLog(msg, type = 'warning') {
+            const consoleBox = document.getElementById('mcpReasoningConsole');
+            const entry = document.createElement('div');
+            entry.className = `text-${type}`;
+            entry.innerText = `>> [${new Date().toLocaleTimeString()}]: ${msg}`;
+            consoleBox.appendChild(entry);
+            consoleBox.scrollTop = consoleBox.scrollHeight;
+        }
+
+        function silenceAllAlarms() {
+            appendMcpLog('WAR_ROOM_OVERRIDE: Operator acknowledged all active incidents. Threat level suppressed to Nominal.', 'info');
+            document.getElementById('threatLevelDisplay').innerHTML = '<i class="fa-solid fa-circle-check me-1 text-success"></i>Threat: 0.00 (Nominal)';
+            document.getElementById('activeTicketCount').innerText = '0 Active Incidents';
+            
+            const incident1 = document.getElementById('incidentRow1');
+            if(incident1) incident1.className = 'table-dark text-muted';
+        }
+
+        function triggerEmergencyElsaWorkflow() {
+            appendMcpLog('ELSA_WORKFLOW_FORCE: Forcing Step 3 (Driver Dispatch) and Step 4 (Audit Closure) across all active tickets...', 'success');
+            
+            document.getElementById('workflowStep3Box').className = 'p-2 border border-success rounded bg-dark';
+            document.getElementById('workflowStep3Box').innerHTML = '<div class="text-success fw-bold"><i class="fa-solid fa-check-circle me-1"></i>Step 3: Dispatched</div>';
+            
+            document.getElementById('workflowStep4Box').className = 'p-2 border border-success rounded bg-dark';
+            document.getElementById('workflowStep4Box').innerHTML = '<div class="text-success fw-bold"><i class="fa-solid fa-check-circle me-1"></i>Step 4: Audit Closed</div>';
+        }
+
+        function executeMcpCognitiveMitigation() {
+            appendMcpLog('MCP_AGENTIC_AI: Executing IMcpAgent.MitigateAnomalousNodePolymorphic(). Rerouting NODE-TR-06-03 to Kahramankazan Satellite Hub.', 'success');
+            document.getElementById('aiConfidenceValue').innerText = '99.90%';
+            document.getElementById('aiConfidenceProgressBar').style.width = '100%';
+        }
+
+        function simulateIncidentResolution() {
+            appendMcpLog('INCIDENT_RESOLVED: NODE-TR-06-03 thermal values normalized to +3.8°C. Closing ticket INC-2026-0891.', 'success');
+            document.getElementById('elsaStepRow1').innerText = 'Completed (Closed)';
+            document.getElementById('elsaStepRow1').className = 'text-success fw-bold';
+        }
+
+        function exportIncidentPdf() {
+            appendMcpLog('EXPORTER: Exporting Incident Forensic Audit Ledger to PDF format...', 'info');
+        }
+
+        function mitigateSingleIncident(ticketId) {
+            appendMcpLog(`TICKET_MITIGATION: Executing manual mitigation protocol for ${ticketId}...`, 'info');
+        }
+    </script>
+}

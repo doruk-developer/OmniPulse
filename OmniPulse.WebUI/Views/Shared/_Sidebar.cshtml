@@ -1,0 +1,234 @@
+﻿@using OmniPulse.WebUI.Controllers
+@* [SIDEBAR_USING_INJECTION_POINT] *@
+
+@{
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString() ?? "";
+}
+
+<div class="sys-app-sidebar w-100 h-100 d-flex flex-column">
+    <div class="sys-nav-section mb-4 mt-2">
+        <div class="sys-nav-heading px-3 mb-3 d-flex align-items-center gap-2">
+            <span class="status-dot status-info status-dot-animated"></span>
+            <span class="text-muted font-monospace fw-bold" style="font-size: 0.65rem; letter-spacing: 1.5px;">Ana Modüller</span>
+        </div>
+        
+        <ul class="navbar-nav flex-column px-2">
+            
+            <li class="nav-item">
+                <a class="nav-link @(currentController.Equals("OmniPulse", StringComparison.OrdinalIgnoreCase) ? "active" : "")" href="/OmniPulse/Index">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="fa-solid fa-cube"></i></span>
+                    <span class="nav-link-title">Executive Fleet Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(currentController.Equals("TimeSeries_Telemetry_Panel", StringComparison.OrdinalIgnoreCase) ? "active" : "")" href="/TimeSeries_Telemetry_Panel/Index">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="fa-solid fa-chart-line"></i></span>
+                    <span class="nav-link-title">Time-Series Telemetry Panel</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(currentController.Equals("Vehicle__Device_Inventory", StringComparison.OrdinalIgnoreCase) ? "active" : "")" href="/Vehicle__Device_Inventory/Index">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="fa-solid fa-microchip"></i></span>
+                    <span class="nav-link-title">Vehicle & Device Inventory</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link @(currentController.Equals("Anomaly__Alert_Center", StringComparison.OrdinalIgnoreCase) ? "active" : "")" href="/Anomaly__Alert_Center/Index">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block"><i class="fa-solid fa-triangle-exclamation"></i></span>
+                    <span class="nav-link-title">Anomaly & Alert Center</span>
+                </a>
+            </li>
+
+            <!-- [SIDEBAR_NAV_LINKS_INJECTION_POINT] -->
+
+        </ul>
+    </div>
+
+    <div class="hr-text hr-text-left mt-2 mb-4 opacity-25 px-3 font-monospace" style="font-size: 0.6rem; letter-spacing: 2px;">System State</div>
+
+    <div class="sys-nav-section mb-auto">
+        <div class="sys-nav-heading px-3 mb-3 d-flex align-items-center gap-2">
+            <span class="status-dot status-warning"></span>
+            <span class="text-muted font-monospace fw-bold" style="font-size: 0.65rem; letter-spacing: 1.5px;">Platform & Status</span>
+        </div>
+
+        <ul class="navbar-nav flex-column px-2">
+            <li class="nav-item">
+                <a class="nav-link @(currentController.Equals("Diagnostics", StringComparison.OrdinalIgnoreCase) ? "active" : "")" href="/Diagnostics/Topology">
+                    <span class="nav-link-icon d-md-none d-lg-inline-block text-secondary">
+                        <i class="fa-solid fa-server"></i>
+                    </span>
+                    <span class="nav-link-title text-secondary">System State Monitoring</span>
+                </a>
+            </li>
+
+            <!-- [SIDEBAR_DIAGNOSTIC_INJECTION_POINT] -->
+
+        </ul>
+    </div>
+
+    <div class="sys-sidebar-footer p-3 mt-4">
+        <div class="card bg-transparent border-secondary border-opacity-25 shadow-none mb-0 sys-tier-card">
+            <div class="card-body p-3">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="text-muted font-monospace fw-bold" style="font-size: 0.6rem; letter-spacing: 1.5px; color: #d4af37 !important;">Infrastructure and Version</span>
+                </div>
+                <div class="font-monospace fw-bold text-white d-flex align-items-center gap-2" style="font-size: 0.75rem;">
+                    <i class="fa-solid fa-cube text-info opacity-75"></i>
+                    <span>OmniPulse v3.0</span>
+                    <!-- [SIDEBAR_TIER_NAME_INJECTION_POINT] -->
+                </div>
+            </div>
+        </div>
+
+        <!-- [SIDEBAR_FOOTER_INJECTION_POINT] -->
+
+    </div>
+</div>
+
+<style>
+    .sys-app-sidebar {
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+    }
+
+    .sys-app-sidebar::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .sys-app-sidebar::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .sys-app-sidebar::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+
+    .sys-app-sidebar::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+
+    .sys-nav-section .navbar-nav .nav-item {
+        margin-bottom: 0.35rem;
+    }
+
+    .sys-nav-section .navbar-nav .nav-link {
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border: 1px solid transparent;
+        color: rgba(255, 255, 255, 0.6);
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .sys-nav-section .navbar-nav .nav-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+        background: var(--tblr-primary);
+        transform: scaleY(0);
+        transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transform-origin: bottom;
+    }
+
+    .sys-nav-section .navbar-nav .nav-link:hover {
+        background: rgba(255, 255, 255, 0.04);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.08);
+        transform: translateX(4px);
+    }
+
+    .sys-nav-section .navbar-nav .nav-link:hover::before {
+        transform: scaleY(1);
+        transform-origin: top;
+    }
+
+    /* 🔥 AKTİF SEKMEYİ NEON AYDINLATAN VE CANLANDIRAN KURAL */
+    .sys-nav-section .navbar-nav .nav-link.active {
+        background: linear-gradient(90deg, rgba(0, 212, 255, 0.18) 0%, rgba(0, 212, 255, 0.02) 100%) !important;
+        color: #00d4ff !important;
+        border-color: rgba(0, 212, 255, 0.35) !important;
+        box-shadow: 0 4px 20px rgba(0, 212, 255, 0.12) !important;
+        font-weight: 700 !important;
+    }
+
+    .sys-nav-section .navbar-nav .nav-link.active::before {
+        transform: scaleY(1) !important;
+        background: #00d4ff !important;
+        box-shadow: 0 0 12px #00d4ff !important;
+    }
+
+    .sys-nav-section .navbar-nav .nav-link-icon {
+        font-size: 1.15rem;
+        width: 1.75rem;
+        display: inline-flex;
+        justify-content: flex-start;
+        align-items: center;
+        transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .sys-nav-section .navbar-nav .nav-link:hover .nav-link-icon {
+        transform: scale(1.15);
+    }
+
+    .sys-nav-section .navbar-nav .nav-link.active .nav-link-icon {
+        color: #00d4ff !important;
+        filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.7)) !important;
+    }
+
+    .sys-nav-section .navbar-nav .nav-link-title {
+        font-weight: 500;
+        font-size: 0.85rem;
+        letter-spacing: 0.3px;
+        font-family: 'Inter', sans-serif;
+    }
+
+    .sys-tier-card {
+        background: radial-gradient(circle at top right, rgba(0, 212, 255, 0.05) 0%, transparent 70%) !important;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .sys-tier-card:hover {
+        border-color: rgba(0, 212, 255, 0.3) !important;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.05) !important;
+    }
+
+    .pulse-glow {
+        animation: pulse-glow-anim 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    @@keyframes pulse-glow-anim {
+        0% { box-shadow: 0 0 0 0 rgba(47, 179, 68, 0.4); }
+        70% { box-shadow: 0 0 0 6px rgba(47, 179, 68, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(47, 179, 68, 0); }
+    }
+
+    /* [SIDEBAR_STYLE_INJECTION_POINT] */
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // İstemci tarafı aktif sekme kontrolü (Yedekleyici Güvenlik)
+        const path = window.location.pathname.toLowerCase();
+        const links = document.querySelectorAll('.sys-app-sidebar .nav-link');
+        
+        links.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href && href !== '#' && href !== '/' && path.includes(href.toLowerCase().split('/')[1])) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    /* [SIDEBAR_SCRIPT_INJECTION_POINT] */
+</script>

@@ -1,0 +1,391 @@
+﻿@charset "UTF-8";
+/* ========================================================================================= */
+/* ARCHITECTURE: Strict Namespacing (.tabler-scope) & Deep Variable Fusion                   */
+/* DESCRIPTION: Forces Tabler UI to inherit DNA strictly within its own quarantine.    */
+/* ZERO-POLLUTION GUARANTEE: Will not affect AdminLTE or global Mothership styles.     */
+/* ========================================================================================= */
+
+/* ==========================================================================
+   1. QUARANTINE CORE VARIABLES (Sadece .tabler-scope İçinde Geçerli Olan DNA)
+   ========================================================================== */
+.tabler-scope {
+    /* Renk Paletinin Tabler Damarlarına Enjeksiyonu */
+    --tblr-primary: var(--app-electric, #00d4ff);
+    --tblr-primary-rgb: 0, 212, 255;
+    --tblr-danger: var(--app-danger, #ff0000);
+    --tblr-danger-rgb: 255, 0, 0;
+    --tblr-warning: var(--app-gold, #d4af37);
+    --tblr-warning-rgb: 212, 175, 55;
+    --tblr-success: #2ecc71;
+    --tblr-success-rgb: 46, 204, 113;
+    /* Derin Uzay Karartması (Dark Mode Zorlaması) */
+    --tblr-body-bg: var(--app-bg-deep, #00050a);
+    --tblr-bg-surface: #0a0a0a;
+    --tblr-bg-surface-secondary: #050505;
+    --tblr-bg-surface-tertiary: #111111;
+    --tblr-body-color: #e0e0e0;
+    /* Sınır ve Gölgelendirme Prensipleri */
+    --tblr-border-color: rgba(255, 255, 255, 0.08);
+    --tblr-border-color-translucent: rgba(255, 255, 255, 0.04);
+    --tblr-border-radius: 6px;
+    --tblr-border-radius-lg: 12px;
+    --tblr-shadow-card: 0 10px 30px rgba(0, 0, 0, 0.5);
+    /* Font Hiyerarşisi */
+    --tblr-font-sans-serif: 'Inter', -apple-system, sans-serif;
+    --tblr-font-monospace: 'JetBrains Mono', monospace;
+    /* Kapsül İçi Genel Kurallar */
+    background-color: var(--tblr-body-bg);
+    color: var(--tblr-body-color);
+    font-family: var(--tblr-font-sans-serif);
+    -webkit-font-smoothing: antialiased;
+}
+
+    /* ==========================================================================
+   2. TYPOGRAPHY & TEXT OVERRIDES (Sarmalanmış Hiyerarşi)
+   ========================================================================== */
+    .tabler-scope h1,
+    .tabler-scope h2,
+    .tabler-scope h3,
+    .tabler-scope h4,
+    .tabler-scope h5,
+    .tabler-scope h6,
+    .tabler-scope .h1,
+    .tabler-scope .h2,
+    .tabler-scope .h3,
+    .tabler-scope .h4,
+    .tabler-scope .h5,
+    .tabler-scope .h6,
+    .tabler-scope .page-title,
+    .tabler-scope .card-title {
+        font-family: 'Inter Display', 'Inter', sans-serif !important;
+        font-weight: 700;
+        color: #ffffff;
+        letter-spacing: 0.5px;
+    }
+
+    /* Siber-Teknik Alanlar */
+    .tabler-scope .tracking-block,
+    .tabler-scope .badge,
+    .tabler-scope .status,
+    .tabler-scope .ribbon,
+    .tabler-scope code,
+    .tabler-scope kbd,
+    .tabler-scope pre,
+    .tabler-scope .form-label {
+        font-family: 'JetBrains Mono', monospace !important;
+    }
+
+    .tabler-scope a {
+        color: var(--tblr-primary);
+        transition: all 0.3s ease;
+    }
+
+        .tabler-scope a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 8px var(--tblr-primary);
+        }
+
+
+    /* ==========================================================================
+   3. SHELL & LAYOUT ADAPTATION (Tabler İskeletinin Siberpunk Modifikasyonu)
+   ========================================================================== */
+    .tabler-scope .navbar-vertical.navbar-expand-lg {
+        background-color: #0a0a0a !important;
+        border-right: 1px solid rgba(0, 212, 255, 0.1) !important;
+        box-shadow: 5px 0 25px rgba(0,0,0,0.8);
+    }
+
+    .tabler-scope .navbar {
+        background-color: rgba(5, 5, 5, 0.8) !important;
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* Navigasyon Linkleri */
+    .tabler-scope .navbar-vertical .navbar-nav .nav-link {
+        color: rgba(255, 255, 255, 0.5) !important;
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+        border-radius: 4px;
+        margin: 2px 10px;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+        border-left: 3px solid transparent;
+    }
+
+        .tabler-scope .navbar-vertical .navbar-nav .nav-link:hover {
+            color: #ffffff !important;
+            background-color: rgba(255, 255, 255, 0.03) !important;
+        }
+
+        .tabler-scope .navbar-vertical .navbar-nav .nav-item.active .nav-link,
+        .tabler-scope .navbar-vertical .navbar-nav .nav-link.active {
+            color: var(--app-electric) !important;
+            background: linear-gradient(90deg, rgba(0, 212, 255, 0.1) 0%, transparent 100%) !important;
+            border-left: 3px solid var(--app-electric) !important;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+            .tabler-scope .navbar-vertical .navbar-nav .nav-item.active .nav-link-icon,
+            .tabler-scope .navbar-vertical .navbar-nav .nav-link.active .nav-link-icon {
+                color: var(--app-electric) !important;
+                filter: drop-shadow(0 0 5px rgba(0, 212, 255, 0.8));
+            }
+
+    .tabler-scope .page-wrapper {
+        background-image: linear-gradient(rgba(0, 212, 255, 0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 212, 255, 0.02) 1px, transparent 1px) !important;
+        background-size: 30px 30px !important;
+    }
+
+
+    /* ==========================================================================
+   4. COMPONENT FUSION (Glassmorphism & Neon Injectors)
+   ========================================================================== */
+
+    /* --- 4.1 CARDS (KARTLAR) --- */
+    .tabler-scope .card {
+        background: rgba(15, 15, 15, 0.7) !important;
+        backdrop-filter: blur(12px) !important;
+        -webkit-backdrop-filter: blur(12px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6) !important;
+        transition: transform 0.4s ease, border-color 0.4s ease;
+    }
+
+        .tabler-scope .card:hover {
+            border-color: rgba(0, 212, 255, 0.2) !important;
+            transform: translateY(-2px);
+        }
+
+    .tabler-scope .card-header {
+        background: rgba(0, 0, 0, 0.4) !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        padding: 1rem 1.5rem !important;
+    }
+
+    .tabler-scope .card-footer {
+        background: rgba(0, 0, 0, 0.4) !important;
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* --- 4.2 BUTTONS (BUTONLAR) --- */
+    .tabler-scope .btn {
+        font-family: 'JetBrains Mono', monospace !important;
+        letter-spacing: 1px;
+        font-weight: 600 !important;
+        border-radius: 4px !important;
+        text-transform: uppercase;
+        transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    }
+
+    .tabler-scope .btn-primary {
+        background: var(--tblr-primary) !important;
+        color: #000 !important;
+        border: none !important;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.3) !important;
+    }
+
+        .tabler-scope .btn-primary:hover {
+            background: #fff !important;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8) !important;
+            transform: scale(1.02);
+        }
+
+    .tabler-scope .btn-danger {
+        background: var(--tblr-danger) !important;
+        color: #fff !important;
+        border: none !important;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.3) !important;
+    }
+
+        .tabler-scope .btn-danger:hover {
+            background: #fff !important;
+            color: var(--tblr-danger) !important;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.8) !important;
+        }
+
+    .tabler-scope .btn-outline-primary {
+        border: 1px solid var(--tblr-primary) !important;
+        color: var(--tblr-primary) !important;
+        background: transparent !important;
+    }
+
+        .tabler-scope .btn-outline-primary:hover {
+            background: rgba(0, 212, 255, 0.1) !important;
+            box-shadow: inset 0 0 10px rgba(0, 212, 255, 0.2) !important;
+        }
+
+
+    /* ==========================================================================
+   5. FORM CONTROLS & INPUTS (Siberpunk Veri Girişi)
+   ========================================================================== */
+    .tabler-scope .form-control,
+    .tabler-scope .form-select,
+    .tabler-scope .form-check-input {
+        background-color: #000000 !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        color: #00d4ff !important;
+        font-family: 'JetBrains Mono', monospace !important;
+        font-size: 0.85rem !important;
+        border-radius: 4px !important;
+        transition: all 0.3s ease !important;
+    }
+
+        .tabler-scope .form-control:focus,
+        .tabler-scope .form-select:focus,
+        .tabler-scope .form-check-input:focus {
+            border-color: var(--tblr-primary) !important;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.15) !important;
+            background-color: #050505 !important;
+        }
+
+        .tabler-scope .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.2) !important;
+        }
+    /* Form Switch (On/Off) */
+    .tabler-scope .form-switch .form-check-input:checked {
+        background-color: var(--tblr-primary) !important;
+        border-color: var(--tblr-primary) !important;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.5) !important;
+    }
+
+
+    /* ==========================================================================
+   6. TABLES, MODALS & DROPDOWNS (İzole Veri Gösterimleri)
+   ========================================================================== */
+
+    /* --- 6.1 TABLES --- */
+    .tabler-scope .table {
+        color: #cccccc !important;
+        --tblr-table-bg: transparent !important;
+    }
+
+        .tabler-scope .table thead th {
+            background-color: #050505 !important;
+            color: var(--tblr-primary) !important;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3) !important;
+        }
+
+        .tabler-scope .table tbody tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02) !important;
+            transition: background-color 0.2s;
+        }
+
+            .tabler-scope .table tbody tr:hover {
+                background-color: rgba(0, 212, 255, 0.04) !important;
+            }
+
+    /* --- 6.2 DROPDOWNS --- */
+    .tabler-scope .dropdown-menu {
+        background: rgba(10, 10, 10, 0.95) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 212, 255, 0.2) !important;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    .tabler-scope .dropdown-item {
+        color: #cccccc !important;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        transition: 0.2s;
+    }
+
+        .tabler-scope .dropdown-item:hover {
+            background: rgba(0, 212, 255, 0.1) !important;
+            color: #ffffff !important;
+            padding-left: 1rem !important; /* Estetik kayma efekti */
+        }
+
+    /* --- 6.3 MODALS --- */
+    .tabler-scope .modal-content {
+        background: rgba(10, 10, 10, 0.95) !important;
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(0, 212, 255, 0.3) !important;
+        box-shadow: 0 0 50px rgba(0, 212, 255, 0.1) !important;
+    }
+
+    .tabler-scope .modal-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    .tabler-scope .modal-footer {
+        border-top: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+
+    /* ==========================================================================
+   7. UTILITIES & DATA VISUALIZATION (Badge, Ribbon, Progress)
+   ========================================================================== */
+
+    /* Badges (Rozetler) */
+    .tabler-scope .badge {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 800;
+    }
+
+        .tabler-scope .badge.bg-primary {
+            background-color: rgba(0, 212, 255, 0.1) !important;
+            color: var(--tblr-primary) !important;
+            border: 1px solid var(--tblr-primary);
+        }
+
+        .tabler-scope .badge.bg-danger {
+            background-color: rgba(255, 0, 0, 0.1) !important;
+            color: var(--tblr-danger) !important;
+            border: 1px solid var(--tblr-danger);
+        }
+
+    /* Ribbons (Kart Köşesi Şeritleri) */
+    .tabler-scope .ribbon {
+        font-weight: 800 !important;
+        letter-spacing: 2px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+
+        .tabler-scope .ribbon.bg-primary {
+            background: var(--tblr-primary) !important;
+            color: #000 !important;
+        }
+
+        .tabler-scope .ribbon.bg-danger {
+            background: var(--tblr-danger) !important;
+            color: #fff !important;
+        }
+
+        .tabler-scope .ribbon.bg-warning {
+            background: var(--tblr-warning) !important;
+            color: #000 !important;
+        }
+
+    /* Status Dots (Bağlantı Noktaları) */
+    .tabler-scope .status-dot {
+        box-shadow: 0 0 8px currentColor !important;
+    }
+
+    /* Progress Bars */
+    .tabler-scope .progress {
+        background-color: #111 !important;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 2px;
+    }
+
+    .tabler-scope .progress-bar {
+        background-color: var(--tblr-primary) !important;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    }
+
+    /* Avatarlar */
+    .tabler-scope .avatar {
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: #111;
+        color: var(--tblr-primary);
+    }
+
+/* ==========================================================================
+   [EOF] THE LEVIATHAN TABLER BRIDGE (SCOPED & SECURED)
+   ========================================================================== */
