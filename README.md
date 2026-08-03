@@ -152,5 +152,4 @@ This software is an independent personal portfolio project developed strictly fo
 
 * 📍 **Location:** Ankara, Turkiye  
 * 🔗 **LinkedIn:** [linkedin.com/in/dorukavgin](https://www.linkedin.com/in/dorukavgin)  
-* 💻 **GitHub:** [github.com/doruk-developer](https://github.com/doruk-developer)  
-* 🌐 **Portfolio Showcase:** [curelogix.com.tr](https://www.curelogix.com.tr)
+* 💻 **GitHub:** [github.com/doruk-developer](https://github.com/doruk-developer)
