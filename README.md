@@ -24,6 +24,19 @@ Unlike basic CRUD applications, OmniPulse tackles critical distributed engineeri
 
 ---
 
+## 🎬 Video Architecture Walkthrough (5-Part Series)
+
+> 🍿 **Watch the complete 5-part video demonstration on YouTube:**  
+> 🔗 **[OmniPulse Architecture Series - Full YouTube Playlist](https://www.youtube.com/playlist?list=PLG7bL3Ahfu5c)**
+
+| Episode | Focus Area | Core Architecture & Tech Stack |
+| :--- | :--- | :--- |
+| **Part 1** | Executive Fleet Dashboard | High-Frequency Ingestion & .NET Channels |
+| **Part 2** | Time-Series Telemetry Panel | WebSockets (SignalR & Redis) + InfluxDB Flux Engine |
+| **Part 3** | Device Inventory & Audit Forensics | EF Core Interceptors & SHA-512 Soft-Delete Audit Trail |
+| **Part 4** | Anomaly Alert War Room | Elsa Workflows Automation & MCP Agentic AI |
+| **Part 5** | Global Latency & Topology | Dapr Sidecar Mesh, gRPC & Glass-Box Observability |
+
 ## 🏗️ Core Architectural Capabilities & Tech Stack
 
 ```text
