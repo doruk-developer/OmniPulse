@@ -14,6 +14,10 @@
   <i>A Technical Showcase of Enterprise Software Engineering & Glass-Box System Architecture</i>
 </p>
 
+<p align="center">
+  <img src="screenshots/Dashboard.png" width="100%" alt="OmniPulse Executive Dashboard">
+</p>
+
 ---
 
 ## 📋 Executive Summary
