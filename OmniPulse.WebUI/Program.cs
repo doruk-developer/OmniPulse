@@ -1,24 +1,25 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using InfluxDB.Client;
+using MassTransit;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using MediatR;
-using MassTransit;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System;
-using OmniPulse.Entities.Common;   
 using OmniPulse.Business.Services;
 using OmniPulse.Business.StateMachines;
 using OmniPulse.DataAccess;
+using OmniPulse.Entities.Common;   
+using OmniPulse.Entities.Models.Dto;
 using OmniPulse.WebUI.Common;       
+using OmniPulse.WebUI.Common.Agents;
+using OmniPulse.WebUI.Common.Hubs;
 using OmniPulse.WebUI.Common.Middleware;
 using OmniPulse.WebUI.Common.Security;
-using OmniPulse.Entities.Models.Dto;
-using OmniPulse.WebUI.Common.Hubs;
 using OmniPulse.WebUI.Common.Services;
-using Microsoft.AspNetCore.Authorization;
-using OmniPulse.WebUI.Common.Agents;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,6 +51,13 @@ builder.Services.AddAuthorization(options =>
 // [TELEMETRY_SERVICES_REGISTRATION]
 builder.Services.AddSingleton<ITelemetryChannel, TelemetryChannel>();
 builder.Services.AddHostedService<TelemetryIngestionWorker>();
+
+// [INFLUXDB_CLIENT_REGISTRATION]
+builder.Services.AddSingleton<IInfluxDBClient>(sp =>
+    new InfluxDBClient(
+        builder.Configuration["InfluxDb:Url"],
+        builder.Configuration["InfluxDb:Token"]
+    ));
 
 // [ELSA_WORKFLOW_SERVICES_REGISTRATION]
 builder.Services.AddScoped<IColdChainWorkflowEngine, ColdChainBreachWorkflow>();
